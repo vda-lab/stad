@@ -20,14 +20,13 @@ install_github("vda-lab/stad")
 
 ## Example
 ```r
+library(stad)
+library(ggplot2)
+
 # Circles dataset
 data(circles)
 
-library(magrittr)
-library(ggplot2)
-
-circles %>%
-  ggplot(aes(x,y, color = lens)) +
+ggplot(circles, aes(x,y, color = lens)) +
   geom_point()
 
 circles_distance <- dist(circles[,c("x", "y")])

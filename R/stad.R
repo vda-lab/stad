@@ -15,7 +15,7 @@
 #' @param filter_values numeric array or two-dimensional data.frame with the lenses to use in STAD.
 #' @param num_intervals number or array defining the number of intervals to consider in the filters.
 #' @param metric string or array defining the metrics supported ("polar" or "euclidean").
-#' @param penalty numeric penalty value used during the optimization loop. It limits the number of iterations. Default = 0.
+#' @param penalty numeric penalty value used during the optimization loop. It limits the number of iterations. Default = 0. We recommend to set a penalty = 0.001 or lower.
 #' @param random_factor integer factor that controls the variability of the next iteration on the optimization algorithm. Default = 10000. Higher values generates more diverse exploration.
 #' @param iterations_inner_loop integer number of evaluations for each iteration. The number of iterations allows knowing the close values around but increase the total number of iterations.
 #' @param two_mst boolean indicating if the MST is build using the two-step MST. It only applies when \code{filter_values} are defined.
@@ -35,14 +35,13 @@
 #' iris_stad <- stad(iris_distance)
 #' plot_graph(iris_stad)
 #' plot_trace(iris_stad)
-#' # Circles dataset
-#' data(circles)
 #'
-#' library(magrittr)
+#' # Circles dataset
+#'  data(circles)
+#'
 #' library(ggplot2)
 #'
-#' circles %>%
-#'   ggplot(aes(x,y, color = lens)) +
+#' ggplot(circles, aes(x,y, color = lens)) +
 #'   geom_point()
 #'
 #' circles_distance <- dist(circles[,c("x", "y")])

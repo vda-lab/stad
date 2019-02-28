@@ -17,7 +17,7 @@ stad(distance_matrix, filter_values = NULL, num_intervals = NULL,
 
 \item{metric}{string or array defining the metrics supported ("polar" or "euclidean").}
 
-\item{penalty}{numeric penalty value used during the optimization loop. It limits the number of iterations. Default = 0.}
+\item{penalty}{numeric penalty value used during the optimization loop. It limits the number of iterations. Default = 0. We recommend to set a penalty = 0.001 or lower.}
 
 \item{random_factor}{integer factor that controls the variability of the next iteration on the optimization algorithm. Default = 10000. Higher values generates more diverse exploration.}
 
@@ -44,14 +44,13 @@ iris_distance <- dist(iris[,1:4])
 iris_stad <- stad(iris_distance)
 plot_graph(iris_stad)
 plot_trace(iris_stad)
-# Circles dataset
-data(circles)
 
-library(magrittr)
+# Circles dataset
+ data(circles)
+
 library(ggplot2)
 
-circles \%>\%
-  ggplot(aes(x,y, color = lens)) +
+ggplot(circles, aes(x,y, color = lens)) +
   geom_point()
 
 circles_distance <- dist(circles[,c("x", "y")])
