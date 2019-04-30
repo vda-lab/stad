@@ -146,6 +146,7 @@ stad_with_lens <- function( distance_matrix,
 
     # Cluster random walk
     walktrap_intra <- igraph::cluster_walktrap(
+      weights = 1 / (1 + distance_matrix_df$weight_intra),
       mst_graph_intra,
       steps = 20
     )
