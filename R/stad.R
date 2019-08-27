@@ -19,6 +19,7 @@
 #' @param random_factor integer factor that controls the variability of the next iteration on the optimization algorithm. Default = 10000. Higher values generates more diverse exploration.
 #' @param iterations_inner_loop integer number of evaluations for each iteration. The number of iterations allows knowing the close values around but increase the total number of iterations.
 #' @param two_mst boolean indicating if the MST is build using the two-step MST. It only applies when \code{filter_values} are defined.
+#' @param ratio boolean Enable STAD-R. Default = FALSE.
 #'
 #' @export
 #' @return Returns a \code{stad} class (or \code{list}) with the following items:
@@ -72,7 +73,7 @@ stad <- function( distance_matrix,
                        penalty = penalty,
                        random_factor = random_factor,
                        iterations_inner_loop = iterations_inner_loop,
-                       ratio = FALSE)
+                       ratio = ratio)
 
   } else if(!is.null(filter_values)) {
 
@@ -84,7 +85,7 @@ stad <- function( distance_matrix,
                      random_factor = random_factor,
                      iterations_inner_loop = iterations_inner_loop,
                      two_mst = two_mst,
-                     ratio = FALSE)
+                     ratio = ratio)
 
   }
 
