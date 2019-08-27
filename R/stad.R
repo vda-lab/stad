@@ -63,14 +63,16 @@ stad <- function( distance_matrix,
                   penalty = 0,
                   random_factor = 10000,
                   iterations_inner_loop = 10,
-                  two_mst = FALSE){
+                  two_mst = FALSE,
+                  ratio = FALSE){
 
   if (is.null(filter_values)) {
 
     stad_without_lens( distance_matrix,
                        penalty = penalty,
                        random_factor = random_factor,
-                       iterations_inner_loop = iterations_inner_loop)
+                       iterations_inner_loop = iterations_inner_loop,
+                       ratio = FALSE)
 
   } else if(!is.null(filter_values)) {
 
@@ -81,7 +83,8 @@ stad <- function( distance_matrix,
                      penalty = penalty,
                      random_factor = random_factor,
                      iterations_inner_loop = iterations_inner_loop,
-                     two_mst = two_mst)
+                     two_mst = two_mst,
+                     ratio = FALSE)
 
   }
 
