@@ -127,7 +127,7 @@ stad_evaluation <- function( distance_matrix = NULL,
     # Select the the number of edges to be evaluated
     iteration <- spanning_tree %>% dplyr::filter( order <= i | .data$mst == 1 )
     # Ratio similarity-distance
-    ratio <- sum(1-iteration$value) / ( 1 + sum(iteration$value) )
+    ratio_value <- sum(1-iteration$value) / ( 1 + sum(iteration$value) )
     # Transformation into a graph
     iteration_graph <- igraph::graph_from_data_frame(iteration, directed = FALSE, vertices = vertices_names)
     # Computing shortest path matrix
@@ -143,7 +143,7 @@ stad_evaluation <- function( distance_matrix = NULL,
     if (verbose) print( c( i, correlation) )
     #
     if (ratio == TRUE) {
-      obj_fun <- ratio * correlation - ( penalty * i *  constant_size )
+      obj_fun <- ratio_value * correlation - ( penalty * i *  constant_size )
     } else {
       obj_fun <- correlation - ( penalty * i *  constant_size )
     }

@@ -217,7 +217,7 @@ stad_with_lens <- function( distance_matrix,
                                     penalty = penalty,
                                     random_factor = random_factor,
                                     iterations_inner_loop = iterations_inner_loop,
-                                    ratio = FALSE)
+                                    ratio = ratio)
 
   return(list_to_return)
 }
