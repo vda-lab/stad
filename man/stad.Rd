@@ -6,7 +6,7 @@
 \usage{
 stad(distance_matrix, filter_values = NULL, num_intervals = NULL,
   metric = NULL, penalty = 0, random_factor = 10000,
-  iterations_inner_loop = 10, two_mst = FALSE)
+  iterations_inner_loop = 10, two_mst = FALSE, ratio = TRUE)
 }
 \arguments{
 \item{distance_matrix}{dist object containing a distance matrix.}
@@ -24,6 +24,8 @@ stad(distance_matrix, filter_values = NULL, num_intervals = NULL,
 \item{iterations_inner_loop}{integer number of evaluations for each iteration. The number of iterations allows knowing the close values around but increase the total number of iterations.}
 
 \item{two_mst}{boolean indicating if the MST is build using the two-step MST. It only applies when \code{filter_values} are defined.}
+
+\item{ratio}{boolean Enable STAD-R. Default = TRUE.}
 }
 \value{
 Returns a \code{stad} class (or \code{list}) with the following items:

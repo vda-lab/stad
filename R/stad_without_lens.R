@@ -19,6 +19,7 @@
 #' @param penalty numeric penalty value used during the optimization loop. It limits the number of iterations. Default = 0.
 #' @param random_factor integer factor that controls the variability of the next iteration on the optimization algorithm. Default = 10000. Higher values generates more diverse exploration.
 #' @param iterations_inner_loop integer number of evaluations for each iteration. The number of iterations allows knowing the close values around but increase the total number of iterations.
+#' @param ratio boolean Enable STAD-R. Default = TRUE.
 #'
 #' @return Returns a \code{stad} class (or \code{list}) with the following items:
 #' \itemize{
@@ -31,7 +32,7 @@ stad_without_lens <- function( distance_matrix,
                                penalty = 0,
                                random_factor = 10000,
                                iterations_inner_loop = 10,
-                               ratio = FALSE){
+                               ratio = TRUE){
 
   # Distance matrix transformation
   modified_distance_matrix <- modify_distance_matrix(distance_matrix)

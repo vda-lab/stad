@@ -21,6 +21,7 @@
 #' @param random_factor integer factor that controls the variability of the next iteration on the optimization algorithm. Default = 10000. Higher values generates more diverse exploration.
 #' @param iterations_inner_loop integer number of evaluations for each iteration. The number of iterations allows knowing the close values around but increase the total number of iterations.
 #' @param two_mst boolean indicating if the MST is build using the two-step MST. It only applies when \code{filter_values} are defined.
+#' @param ratio boolean Enable STAD-R. Default = TRUE.
 #' @importFrom rlang .data
 #'
 #' @return Returns a \code{stad} class (or \code{list}) with the following items:
@@ -38,7 +39,7 @@ stad_with_lens <- function( distance_matrix,
                             random_factor = 10000,
                             iterations_inner_loop = 10,
                             two_mst = FALSE,
-                            ratio = FALSE){
+                            ratio = TRUE){
 
 
   # Distance matrix transformation

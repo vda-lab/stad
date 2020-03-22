@@ -5,7 +5,7 @@
 \title{STAD without lens}
 \usage{
 stad_without_lens(distance_matrix, penalty = 0, random_factor = 10000,
-  iterations_inner_loop = 10)
+  iterations_inner_loop = 10, ratio = TRUE)
 }
 \arguments{
 \item{distance_matrix}{dist object containing a distance matrix.}
@@ -15,6 +15,8 @@ stad_without_lens(distance_matrix, penalty = 0, random_factor = 10000,
 \item{random_factor}{integer factor that controls the variability of the next iteration on the optimization algorithm. Default = 10000. Higher values generates more diverse exploration.}
 
 \item{iterations_inner_loop}{integer number of evaluations for each iteration. The number of iterations allows knowing the close values around but increase the total number of iterations.}
+
+\item{ratio}{boolean Enable STAD-R. Default = TRUE.}
 }
 \value{
 Returns a \code{stad} class (or \code{list}) with the following items:

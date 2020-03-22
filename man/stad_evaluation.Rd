@@ -6,7 +6,7 @@
 \usage{
 stad_evaluation(distance_matrix = NULL, distance_matrix_df = NULL,
   vertices_names = NULL, mst_graph = NULL, penalty = NULL,
-  random_factor = NULL, iterations_inner_loop = NULL)
+  random_factor = NULL, iterations_inner_loop = NULL, ratio = FALSE)
 }
 \arguments{
 \item{distance_matrix}{Distance matrix as \code{dist} format.}

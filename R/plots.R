@@ -29,13 +29,14 @@ plot_trace <- function(x){
 
   # Define x range
   range_x <- range(x$trace$iteration)
+  range_y <- range(x$trace$correlation)
 
   # Adapt labels for Max correlation, Selected number of edges or Other evaluations
   x$trace <- x$trace %>%
     dplyr::mutate(
       type = ifelse(
         .data$correlation == max( x$trace$correlation ),
-        "Max. correlation",
+        "Max. obj. fun.",
         "Other evaluations"
       ),
       type = ifelse(
@@ -43,7 +44,7 @@ plot_trace <- function(x){
         "Selected number of edges",
         .data$type
       ),
-      type = factor(.data$type,  levels = c("Other evaluations", "Max. correlation", "Selected number of edges"))
+      type = factor(.data$type,  levels = c("Other evaluations", "Max. obj. fun.", "Selected number of edges"))
     )
 
   x$trace %>%
@@ -55,16 +56,16 @@ plot_trace <- function(x){
     ) +
     ggplot2::geom_point(
       data = x$trace %>%
-        dplyr::filter(.data$type == "Max. correlation"), fill = "#fc4e2a", shape = 21, color = "#252525", size = 2.5) +
+        dplyr::filter(.data$type == "Max. obj. fun."), fill = "#fc4e2a", shape = 21, color = "#252525", size = 2.5) +
     ggplot2::geom_point(
       data = x$trace %>%
         dplyr::filter(.data$type == "Selected number of edges"), fill = "#fe9929", shape = 21, color = "#252525", size = 2.5) +
     ggplot2::theme_bw() +
     ggplot2::theme(legend.position="bottom") +
     ggplot2::scale_x_continuous(breaks = round(seq(range_x[1], range_x[2], range_x[2] /10) ) ) +
-    ggplot2::scale_y_continuous(limits=c(0, 1), breaks = seq(0,1, 0.1)) +
+    ggplot2::scale_y_continuous(breaks = round(seq(range_y[1], range_y[2], range_y[2] /10) )) +
     ggplot2::labs(x = "Num. edges",
-                  y = "Objective Function (Correlation)",
+                  y = "Objective Function",
                   title = "Intermediate results during STAD process",
                   color = "",
                   caption = "Generated with plot_trace")
