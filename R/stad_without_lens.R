@@ -30,7 +30,8 @@
 stad_without_lens <- function( distance_matrix,
                                penalty = 0,
                                random_factor = 10000,
-                               iterations_inner_loop = 10 ){
+                               iterations_inner_loop = 10,
+                               ratio = FALSE){
 
   # Distance matrix transformation
   modified_distance_matrix <- modify_distance_matrix(distance_matrix)
@@ -51,7 +52,8 @@ stad_without_lens <- function( distance_matrix,
                                                             weights = distance_matrix_df$value),
                                     penalty = penalty,
                                     random_factor = random_factor,
-                                    iterations_inner_loop = iterations_inner_loop)
+                                    iterations_inner_loop = iterations_inner_loop,
+                                    ratio = ratio)
 
   return(list_to_return)
 }
@@ -85,7 +87,8 @@ stad_evaluation <- function( distance_matrix = NULL,
                              mst_graph = NULL,
                              penalty = NULL,
                              random_factor = NULL,
-                             iterations_inner_loop = NULL){
+                             iterations_inner_loop = NULL,
+                             ratio = FALSE){
 
   # Computing Minimum Spanning Tree from igraph package (MST)
   mst_matrix <- igraph::as_data_frame(mst_graph) %>%
@@ -123,6 +126,8 @@ stad_evaluation <- function( distance_matrix = NULL,
   evaluation <- function (i, verbose = TRUE){
     # Select the the number of edges to be evaluated
     iteration <- spanning_tree %>% dplyr::filter( order <= i | .data$mst == 1 )
+    # Ratio similarity-distance
+    ratio_value <- sum(1-iteration$value) / ( 1 + sum(iteration$value) )
     # Transformation into a graph
     iteration_graph <- igraph::graph_from_data_frame(iteration, directed = FALSE, vertices = vertices_names)
     # Computing shortest path matrix
@@ -135,9 +140,13 @@ stad_evaluation <- function( distance_matrix = NULL,
     # The filter remove NA's value from stad with lens
     correlation <- stats::cor( comparsion_matrix$a, comparsion_matrix$b)
     # Print intermediate result to be captured
-    if (verbose) print( c( i, correlation) )
-    #
-    return( correlation - ( penalty * i *  constant_size ))
+    if (ratio == TRUE) {
+      obj_fun <- ratio_value * correlation - ( penalty * i *  constant_size )
+    } else {
+      obj_fun <- correlation - ( penalty * i *  constant_size )
+    }
+    if (verbose) print( c( i, obj_fun) )
+    return( obj_fun )
   }
 
   # ----

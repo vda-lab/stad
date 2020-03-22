@@ -37,7 +37,8 @@ stad_with_lens <- function( distance_matrix,
                             penalty = 0,
                             random_factor = 10000,
                             iterations_inner_loop = 10,
-                            two_mst = FALSE){
+                            two_mst = FALSE,
+                            ratio = FALSE){
 
 
   # Distance matrix transformation
@@ -215,7 +216,8 @@ stad_with_lens <- function( distance_matrix,
                                     mst_graph = mst_graph_inter,
                                     penalty = penalty,
                                     random_factor = random_factor,
-                                    iterations_inner_loop = iterations_inner_loop)
+                                    iterations_inner_loop = iterations_inner_loop,
+                                    ratio = ratio)
 
   return(list_to_return)
 }
